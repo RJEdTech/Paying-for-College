@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Builds the three pages of Paying for College from src/*.html bodies.
+"""Builds the pages of Paying for College from src/*.html bodies.
 Shared head, masthead, draft banner, footer and GoatCounter snippet live here,
 so every page stays identical around its body. Run: python3 build.py"""
 import pathlib, re, time
@@ -41,7 +41,11 @@ PAGES = [
     ('award-letters.html', 'src/award-letters.html', 'Award Letter Decoder · Paying for College',
      'Compare up to four college financial aid offers: free money, loans, work-study, and the real net price over four years.', ['colleges.js', 'award-letters.js']),
     ('who-borrows.html', 'src/who-borrows.html', 'Who Borrows? · Paying for College',
-     'Compare a student borrowing federal loans first with parents borrowing it all through Parent PLUS, under the 2026 loan limits.', ['colleges.js', 'who-borrows.js']),
+     'Compare a student borrowing federal loans first with parents borrowing it all through Parent PLUS, under the 2026 loan limits.', ['colleges.js', 'loans.js', 'who-borrows.js']),
+    ('costs.html', 'src/costs.html', 'What It Costs \u00b7 Paying for College',
+     'The pieces of a college\u2019s price: tuition, housing and meal plans, books and personal costs; living on or off campus; in-state, out-of-state and the WUE discount.', ['colleges.js', 'costs.js']),
+    ('paths.html', 'src/paths.html', 'Compare Paths \u00b7 Paying for College',
+     'If I go here, then what? Compare up to three colleges: what each costs, what it means in loans, and the salary each path needs after college, by major and city.', ['colleges.js', 'loans.js', 'life-data.js', 'paths.js']),
     ('payoff.html', 'src/payoff.html', 'Loan Payoff Calculator \u00b7 Paying for College',
      'Monthly payment, payoff date and interest for a student or Parent PLUS loan at today\u2019s rates, with and without extra payments.', ['payoff.js']),
 ]

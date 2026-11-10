@@ -136,7 +136,7 @@ input[type=text],input[type=number],select{font:inherit;font-size:16px;width:100
 .school{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 14px 6px}
 .school .sname input{font-weight:700}
 .school fieldset{border:0;padding:0;margin:12px 0 4px}
-.school legend{font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0 0 6px;padding:0}
+.school legend{font-size:14px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0 0 6px;padding:0}
 .school .field{margin-bottom:8px}
 .school label{font-size:14px}
 .school .rm{float:right;font:inherit;font-size:14px;background:none;border:0;color:var(--muted);cursor:pointer;text-decoration:underline;padding:0}
@@ -159,7 +159,7 @@ input[type=text],input[type=number],select{font:inherit;font-size:16px;width:100
 .kv dt{color:var(--muted)}
 .kv dd{margin:0;text-align:right;font-variant-numeric:tabular-nums}
 .kv .tot{font-weight:700;color:var(--fg)}
-.lowest{display:inline-block;font-size:13px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--good);border:1px solid var(--good);border-radius:999px;padding:1px 8px;margin-left:6px;vertical-align:middle}
+.lowest{display:inline-block;font-size:14px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--good);border:1px solid var(--good);border-radius:999px;padding:1px 8px;margin-left:6px;vertical-align:middle}
 
 /* Borrowing scenarios */
 .scen{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px;margin:12px 0 18px}
@@ -181,10 +181,10 @@ input[type=text],input[type=number],select{font:inherit;font-size:16px;width:100
 .tltrack{position:relative;height:38px;border-left:1px solid var(--line)}
 .tlbar{position:absolute;top:2px;height:14px;border-radius:7px}
 .tlbar.school{background:var(--line)}
-.tlnote{position:absolute;top:18px;white-space:nowrap;font-size:13px;color:var(--fg)}
+.tlnote{position:absolute;top:18px;white-space:nowrap;font-size:14px;color:var(--fg)}
 .tlrow:first-child .tltrack{height:18px}
 .tlaxis{position:relative;height:18px;border-top:1px solid var(--line)}
-.tlaxis span{position:absolute;top:2px;transform:translateX(-50%);font-size:13px;color:var(--muted)}
+.tlaxis span{position:absolute;top:2px;transform:translateX(-50%);font-size:14px;color:var(--muted)}
 .costbar .bar{height:18px}
 .dchart{display:flex;flex-direction:column;gap:8px;margin:8px 0}
 .drow{display:grid;grid-template-columns:150px 1fr 104px;align-items:center;gap:10px;width:100%;text-align:left;font:inherit;font-size:14px;color:var(--fg);
@@ -204,6 +204,29 @@ input[type=text],input[type=number],select{font:inherit;font-size:16px;width:100
 .start:hover{border-color:var(--rj)}
 .lc{width:100%;height:auto;display:block;margin:4px 0 6px}
 .saved{background:var(--info-bg);color:var(--info-ink);border-radius:8px;padding:8px 10px;margin:8px 0 0;font-size:15px}
+
+/* Glossary cards */
+.terms{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin:8px 0 18px}
+.term{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.term h4{margin:0 0 4px;font-size:16px}
+.term p{margin:0;font-size:15px}
+
+/* Compare Paths */
+.paths{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px;margin:12px 0 18px}
+.path{background:var(--card);border:1px solid var(--line);border-top:6px solid var(--pc,var(--rj));border-radius:12px;padding:14px 14px 6px}
+.path h4{margin:0 0 8px;font-size:17px}
+.path .field{margin-bottom:8px}
+.path label{font-size:14px}
+.pchip{display:inline-block;width:14px;height:14px;border-radius:4px;vertical-align:-2px;margin-right:6px;background:var(--pc)}
+.need{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:10px 0}
+.need .result{margin:0;border-top:6px solid var(--pc,var(--line))}
+.need .big{font-size:28px;font-weight:700;line-height:1.1;margin:2px 0 4px;font-variant-numeric:tabular-nums}
+.marks .yrow{grid-template-columns:200px 1fr 92px}
+.marks .ylab{color:var(--fg)}
+@media(max-width:600px){.marks .yrow{grid-template-columns:1fr 90px}.marks .ytrack{grid-column:1 / -1;grid-row:2}}
+.seg-legend{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:2px 14px;font-size:14px;margin:6px 0 10px}
+.seg-legend span{display:flex;justify-content:space-between;gap:8px}
+.seg-legend b{font-weight:600;font-variant-numeric:tabular-nums}
 
 /* Footer */
 .foot{margin-top:36px;padding-top:14px;border-top:1px solid var(--line);font-size:14px;color:var(--muted)}

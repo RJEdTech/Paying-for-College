@@ -11,6 +11,8 @@ var FACTS = {
   plus:   { rate: 0.0907, fee: 0.04228, annualCap: 20000, aggregateCap: 65000 },
   /* Tiered Standard plan (loans made on or after July 1, 2026): term set by the balance entering repayment */
   tiers: [ [25000, 10], [50000, 15], [100000, 20], [Infinity, 25] ],
+  /* Graduate loans for 2026–27 (One Big Beautiful Bill Act): Grad PLUS ends for new borrowers July 1, 2026 */
+  grad: { rate: 0.0807, fee: 0.01057, annual: 20500, aggregate: 100000, profAnnual: 50000, profAggregate: 200000, lifetime: 257500 },
   sources: {
     direct: 'https://www2.mu.edu/central/financial-aid/loans/undergraduate-unsubsidized.php',
     fees: 'https://financial-aid.catholic.edu/financial-aid-basics/direct-loan-fees-interest.html',
@@ -103,10 +105,34 @@ function collegeOptions(selected){
 }
 /* Colorado residents pay in-state tuition only at Colorado public colleges */
 function coloradoRate(c){ return c.pub && c.st === 'CO'; }
-function collegeCost(c){
-  var tuition = coloradoRate(c) ? c.tin : c.tout;
-  return { tuition: tuition || 0, housing: c.rb || 0, other: (c.bk || 0) + (c.oth || 0) };
+/* Tuition choices a Colorado student has at this college:
+   'in' (Colorado public), 'out' (other public), 'wue' (Western Undergraduate Exchange: at most 150% of in-state), 'priv' */
+function residencyChoices(c){
+  if (!c.pub) return ['priv'];
+  if (c.st === 'CO') return ['in'];
+  return c.wue ? ['wue', 'out'] : ['out'];
 }
+function wueTuition(c){ return Math.min(c.tout || 0, Math.round(1.5 * (c.tin || 0))); }
+/* Published yearly cost, split four ways.
+   opts.res: 'in' | 'out' | 'wue' (ignored for private colleges); opts.live: 'on' | 'off' | 'home'.
+   Scorecard tuition includes required fees. Housing and food = room and board (meal plan) on campus,
+   or the college's own estimate of rent and groceries off campus. Living at home: no housing cost here
+   (the family covers it), and the college's smaller "living with family" allowance for other costs. */
+function collegeCost(c, opts){
+  opts = opts || {};
+  var res = opts.res || (coloradoRate(c) ? 'in' : 'out');
+  if (!c.pub) res = 'priv';
+  if (c.pub && c.st === 'CO') res = 'in';
+  if (res === 'wue' && !c.wue) res = 'out';
+  var tuition = res === 'in' ? c.tin : res === 'wue' ? wueTuition(c) : c.tout;
+  var live = opts.live || 'on';
+  if (live === 'on' && c.rb == null) live = 'off';      /* no campus housing reported */
+  var housing = live === 'on' ? c.rb : live === 'off' ? (c.rbo != null ? c.rbo : c.rb) : 0;
+  var otherLiving = live === 'on' ? c.oth : live === 'off' ? (c.otho != null ? c.otho : c.oth) : (c.othf != null ? c.othf : c.oth);
+  return { tuition: tuition || 0, housing: housing || 0, books: c.bk || 0, personal: otherLiving || 0,
+    other: (c.bk || 0) + (otherLiving || 0), res: res, live: live };
+}
+function costTotal(k){ return k.tuition + k.housing + k.books + k.personal; }
 /* Federal average net prices apply to a Colorado family only at private colleges and Colorado publics */
 function netPricesApply(c){ return !c.pub || c.st === 'CO'; }
 function collegeNote(c){
@@ -119,11 +145,12 @@ function collegeNote(c){
   } else if (c.pub && c.st !== 'CO') {
     h += '<p class="small muted" style="margin:6px 0">Federal averages after grants at this college are for its own state’s residents, so they don’t fit a Colorado family. Some out-of-state students get merit aid; the calculator below shows yours.</p>';
   }
+  if (c.wue) h += '<p class="small" style="margin:6px 0"><b>Western discount (WUE):</b> Colorado students may pay at most 150% of in-state tuition here, about ' + money(wueTuition(c)) + ' a year instead of ' + money(c.tout) + '. Each college sets its own WUE rules (GPA, majors, deadlines). <a href="https://www.wiche.edu/tuition-savings/wue/wue-savings-finder/" target="_blank" rel="noopener">WUE Savings Finder ↗</a></p>';
   if (c.npc) h += '<p class="small" style="margin:6px 0"><a href="' + esc(c.npc) + '" target="_blank" rel="noopener">This college’s net price calculator ↗</a></p>';
   return h;
 }
 
-window.PFC = { FACTS: FACTS, BRACKETS: BRACKETS, findCollege: findCollege, collegeOptions: collegeOptions, collegeCost: collegeCost,
+window.PFC = { FACTS: FACTS, BRACKETS: BRACKETS, findCollege: findCollege, collegeOptions: collegeOptions, collegeCost: collegeCost, costTotal: costTotal, residencyChoices: residencyChoices, wueTuition: wueTuition,
   netPricesApply: netPricesApply, collegeNote: collegeNote, coloradoRate: coloradoRate, collegeData: collegeData, parseMoney: parseMoney, parsePct: parsePct, money: money, round2: round2,
   pctText: pctText, esc: esc, payment: payment, tierYears: tierYears, themeInit: themeInit, moneyInputs: moneyInputs };
 document.addEventListener('DOMContentLoaded', themeInit);

@@ -12,6 +12,15 @@ YEAR = sys.argv[1] if len(sys.argv) > 1 else ''
 IDS = json.load(open(ROOT / 'data' / 'ids.json'))
 NPC = json.load(open(ROOT / 'data' / 'npc.json'))
 RAW = {r[0]: r for r in json.load(open(ROOT / 'data' / 'rows.json'))}
+# data/offcampus.json: [id, city, state, zip, room+board on campus, room+board off campus, other on campus,
+#   other off campus, other living with family, books] (Scorecard "latest", pulled Nov 10, 2026).
+OFF = {r[0]: r for r in json.load(open(ROOT / 'data' / 'offcampus.json'))}
+# data/rent.json: [id, ZIP used, HUD rent area, studio, 1BR, 2BR, 3BR] from HUD FY2027 Small Area Fair Market Rents
+#   (effective Oct 1, 2026). Campus ZIP, or the nearest city ZIP when HUD lists none for the campus ZIP.
+RENT = {r[0]: r for r in json.load(open(ROOT / 'data' / 'rent.json'))}
+# Western Undergraduate Exchange: on WICHE's list of participating schools (checked Nov 10, 2026).
+# Each school sets its own WUE rules (GPA, majors, deadlines, seats).
+WUE = {104179, 105330, 230764, 230728, 180461, 180489, 240727, 209542, 142115, 142285, 182290, 187985}
 rows = []
 for name, i in IDS.items():
     r = RAW[i]
@@ -47,7 +56,7 @@ G = {
  'catholic': ('Other Catholic universities', [
    ('University of Notre Dame', 'University of Notre Dame'), ('Villanova University', 'Villanova University'),
    ('University of Dayton', 'University of Dayton'), ('Providence College', 'Providence College')]),
- 'west': ('Western public universities (some offer the WUE discount)', [
+ 'west': ('Western public universities (most offer the WUE discount)', [
    ('Arizona State University Campus Immersion', 'Arizona State University'), ('University of Arizona', 'University of Arizona'),
    ('Northern Arizona University', 'Northern Arizona University'), ('University of Utah', 'University of Utah'),
    ('Utah State University', 'Utah State University'), ('Montana State University', 'Montana State University'),
@@ -83,6 +92,10 @@ for key, (label, items) in G.items():
         rec = {'id': r['id'], 'n': show, 'st': ('CO' if key in ('co_pub', 'co_priv') else 'OUT'), 'pub': pub,
                'tin': r['tin'], 'tout': r['tout'], 'rb': r['rb'], 'bk': r['bk'], 'oth': r['oth'],
                'avg': r['avg'], 'nb': r['nb'], 'npc': url}
+        o, h = OFF[r['id']], RENT[r['id']]
+        rec.update({'loc': o[1] + ', ' + o[2], 'sa': o[2], 'rbo': o[5], 'otho': o[7], 'othf': o[8],
+                    'fmr': [h[1], h[2], h[3], h[4], h[5], h[6]]})
+        if r['id'] in WUE: rec['wue'] = 1
         out.append(rec)
     out.sort(key=lambda x: x['n'].replace('University of ', ''))
     groups.append({'key': key, 'label': label, 'colleges': out})

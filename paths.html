@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Compare Paths · Paying for College</title>
+<meta name="description" content="If I go here, then what? Compare up to three colleges: what each costs, what it means in loans, and the salary each path needs after college, by major and city.">
+<script>try{var t=localStorage.getItem('rj-theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="stylesheet" href="pfc.css?v=202611102103">
+</head>
+<body>
+<header class="rj-masthead">
+  <div class="hl">
+    <img class="rj-mark" src="data:image/png;base64,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" alt="RJ">
+    <div>
+      <h1>Paying for College</h1>
+      <p class="tagline">For Regis Jesuit families</p>
+    </div>
+  </div>
+  <div class="mh-right"><button type="button" id="theme" class="mh-btn" aria-pressed="false">Dark mode</button></div>
+</header>
+
+<main class="wrap">
+<p class="crumb no-print"><a href="./">← Paying for College</a></p>
+<p class="draft" role="note"><b>Draft for review by RJ College Counseling.</b> Not yet shared with families. Every number links to its source.</p>
+<h2>Compare Paths: if I go here, then what?</h2>
+<p class="lede">Put up to three colleges side by side. For each one, see what it costs your family, what it means in loans, and how much the student would need to earn after college to pay those loans and live on their own, in the city and with the major they pick.</p>
+<p class="privacy"><span aria-hidden="true">🔒</span><span>Nothing you type or choose here is saved or sent anywhere. The math runs on your device.</span></p>
+
+<div class="card">
+  <h3>1. Your family’s numbers</h3>
+  <div class="grid2">
+    <div class="field"><label for="income">Family income</label><select id="income"></select>
+      <span class="hint">Used to fill in what families like yours paid after grants.</span></div>
+    <div class="field"><label for="family">Parents pay each year from income</label><div class="money"><input type="text" inputmode="decimal" id="family" value="12,000"></div></div>
+    <div class="field"><label for="studentpay">Student pays each year (work, summer job)</label><div class="money"><input type="text" inputmode="decimal" id="studentpay" value="2,000"></div></div>
+    <div class="field"><label for="down">Savings to put toward college (529 or other)</label><div class="money"><input type="text" inputmode="decimal" id="down" value="0"></div>
+      <span class="hint">Used up in the first years.</span></div>
+    <div class="field"><label for="who">Who borrows the rest?</label>
+      <select id="who">
+        <option value="a">Student borrows federal loans first, parents borrow the rest</option>
+        <option value="b">Parents borrow all of it (Parent PLUS)</option>
+        <option value="c">Student’s federal loans only (no parent loans)</option>
+      </select></div>
+    <div class="field"><label for="parentinc">Parents’ yearly income (optional)</label><div class="money"><input type="text" inputmode="decimal" id="parentinc" value=""></div>
+      <span class="hint">Only to check parent borrowing against a rule of thumb.</span></div>
+  </div>
+</div>
+
+<h3>2. The colleges</h3>
+<div class="paths" id="paths"></div>
+
+<div class="card">
+  <h3>3. Life after college</h3>
+  <div class="grid2">
+    <div class="field"><label for="major">Major</label><select id="major"></select></div>
+    <div class="field"><label for="metro">Where your student wants to live</label><select id="metro"></select></div>
+    <div class="field"><label for="stage">Living situation</label>
+      <select id="stage">
+        <option value="alone">On their own, renting alone</option>
+        <option value="room">Sharing a 2-bedroom with a roommate</option>
+        <option value="couple">Married or partnered, both working</option>
+        <option value="kid1">… with 1 child</option>
+        <option value="kid2">… with 2 children</option>
+      </select></div>
+    <div class="field"><label for="save">Saving for emergencies and retirement</label><div class="pct"><input type="text" inputmode="decimal" id="save" value="10"></div>
+      <span class="hint">Share of pay. Many planners suggest 10–15% for retirement alone.</span></div>
+    <div class="field"><label for="home">Housing</label>
+      <select id="home"><option value="rent">Rent (typical local rent)</option><option value="buy">Buy a home</option></select></div>
+  </div>
+  <div class="grid2" id="buy" hidden>
+    <div class="field"><label for="price">Home price</label><div class="money"><input type="text" inputmode="decimal" id="price" value="432,900"></div>
+      <span class="hint">U.S. median for an existing single-family home, third quarter of 2026 (NAR). Local prices vary a lot.</span></div>
+    <div class="field"><label for="dp">Down payment</label><div class="pct"><input type="text" inputmode="decimal" id="dp" value="10"></div>
+      <span class="hint">First-time buyers’ median down payment was 10% (NAR 2025).</span></div>
+    <div class="field"><label for="mrate">30-year mortgage rate</label><div class="pct"><input type="text" inputmode="decimal" id="mrate" value="7.18"></div>
+      <span class="hint">Freddie Mac average, November 5, 2026.</span></div>
+    <div class="field"><label for="tins">Property tax, insurance and mortgage insurance, per year</label><div class="pct"><input type="text" inputmode="decimal" id="tins" value="1.5"></div>
+      <span class="hint">Share of the price. A starting guess; ask a lender for your area.</span></div>
+    <div class="field"><label for="hutil">Utilities and upkeep, per month</label><div class="money"><input type="text" inputmode="decimal" id="hutil" value="350"></div>
+      <span class="hint">Rent figures include utilities; a home’s don’t.</span></div>
+  </div>
+  <div class="grid2">
+    <div class="field"><label for="grad">Graduate school?</label>
+      <select id="grad"><option value="none">No</option><option value="ma">Master’s degree</option><option value="prof">Professional degree (law, medicine, pharmacy …)</option></select></div>
+  </div>
+  <div class="grid2" id="gradbox" hidden>
+    <div class="field"><label for="gyears">Years of graduate school</label><select id="gyears"><option>1</option><option selected>2</option><option>3</option><option>4</option></select></div>
+    <div class="field"><label for="gcost">Cost per year after grants (tuition and living)</label><div class="money"><input type="text" inputmode="decimal" id="gcost" value="40,000"></div></div>
+    <div class="field"><label for="ghelp">Paid each year without loans</label><div class="money"><input type="text" inputmode="decimal" id="ghelp" value="0"></div>
+      <span class="hint">Family help, an assistantship, an employer.</span></div>
+    <div class="field"><label for="gpay">Expected pay after the degree</label><div class="money"><input type="text" inputmode="decimal" id="gpay" value=""></div>
+      <span class="hint">Leave blank to use the major’s middle pay.</span></div>
+  </div>
+</div>
+
+<div id="out" aria-live="polite"></div>
+
+<details class="more"><summary>How the numbers are worked out</summary>
+<div class="small">
+<p><b>College costs and loans.</b> Each college starts from its published cost for 2025–26 (College Scorecard). For private colleges and Colorado public colleges, the price after grants is what families in your income range paid on average; out-of-state publics have no such average for Colorado families, so their full price is shown (type in any scholarship by changing the number). The price rises 3% a year. Loans follow the same model as <a href="who-borrows.html">Who Borrows?</a>: 2026–27 federal rates and fees, the new Parent PLUS limits, interest during school, and the Tiered Standard plan (10 to 25 years by balance).</p>
+<p><b>Living costs.</b> MIT Living Wage Calculator (updated February 15, 2026) for the metro area and household: food, child care, health care (insurance premiums and care), housing (HUD fair market rent with basic utilities), transportation (a car), civic, internet and phone, and other necessities. These are basic needs only: no eating out, vacations or savings. Sharing a 2-bedroom is half of MIT’s 2-bedroom rent. Buying a home replaces rent with a 30-year mortgage, taxes and insurance, and utilities.</p>
+<p><b>Pay needed.</b> The yearly pay at which take-home pay covers the living costs, the student’s loan payment and the savings you chose, after 2026 federal income tax (single, or married filing jointly with the $2,200 child tax credit per child), Social Security and Medicare, and the metro’s state income tax (Colorado 4.4% plus 0.44% FAMLI, Arizona 2.5%, Illinois 4.95%, Utah 4.45%, none in Texas, Tennessee and Washington). For couples, pay is split evenly between two workers. Parent PLUS payments are the parents’, so they are not in the student’s budget.</p>
+<p><b>What jobs pay.</b> Early-career pay by major: Georgetown University Center on Education and the Workforce, <a href="https://cew.georgetown.edu/major-payoff" target="_blank" rel="noopener">The Major Payoff</a> (2025), full-time workers ages 22 to 26 with only a bachelor’s degree, national, in 2024 dollars (a quarter earn less than the low number and a quarter more than the high one). Local pay by kind of work: typical salaries for all experience levels in the metro (MIT, from the Bureau of Labor Statistics). Minimum wage: the state’s rate in MIT’s data, full time for a year (2,080 hours); Denver’s city minimum is higher, $19.29.</p>
+<p><b>Rules of thumb.</b> Total student debt below the first year’s pay, and a loan payment under 10% of pay (Mark Kantrowitz and other aid experts, via <a href="https://www.cnbc.com/2023/03/24/follow-this-rule-of-thumb-to-avoid-taking-on-too-much-student-debt.html" target="_blank" rel="noopener">CNBC</a>); parents’ total college debt for all children below one year’s income, and less near retirement; housing at or under 30% of income (HUD). Guidelines, not rules.</p>
+<p><b>This is a planning estimate, not financial advice.</b> Real pay, rents, rates and taxes will differ.</p>
+</div></details>
+<p class="foot">RJ Ed Tech · Paying for College · Estimates for planning, not financial, tax or legal advice. Facts checked November 10, 2026.<br>
+Questions about your student’s college plans? <a href="https://regisjesuit.com/student-experience/college-counseling" target="_blank" rel="noopener">Contact RJ College Counseling</a>.<br>
+RJ staff: <a href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=4SwuQZc-CEClZjjFdYLisQzihhIB-7hPp9L3AOSeJONUOVJaVTVMOE9YMFNSVVM3TUNOOFVQR1pYTi4u&amp;rc59cb41123d3497584d2ca10cb9e1c54=%22Paying%20for%20College%22" target="_blank" rel="noopener">report a problem or suggest an idea</a> (Microsoft Form, RJ sign-in).<br>
+FAFSA® is a registered trademark of the U.S. Department of Education. CSS Profile is a College Board program. Neither is affiliated with, or endorses, this site.<br>
+© 2026 Jason Beyer, RJ Ed Tech · <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="license noopener">CC BY-NC 4.0</a>: free to share and adapt for non-commercial use, with credit.</p>
+</main>
+
+<script src="pfc.js?v=202611102103"></script>
+<script src="colleges.js?v=202611102103"></script>
+<script src="loans.js?v=202611102103"></script>
+<script src="life-data.js?v=202611102103"></script>
+<script src="paths.js?v=202611102103"></script>
+<!-- Anonymous page-view count (GoatCounter, rjedtech.goatcounter.com): no cookies, no personal data, nothing typed into the tools.
+     Only the page path is sent; anything after ? in the address (such as a net price passed between tools) is never sent.
+     A visit through the school's Securly filter (?scrlybrkr in the address) adds ?sd = school device; nothing else about the visitor is sent. -->
+<script>
+window.goatcounter={no_onload:true};
+(function(){var last=null,tries=0;
+function route(){var h=(location.hash||'').slice(1).split(/[=@?&]/)[0].replace(/[^A-Za-z0-9_-]/g,'').slice(0,40);return location.pathname.replace(/index\.html$/,'')+(h?'#'+h:'')+(/scrlybrkr/.test(location.search)?'?sd':'');}
+function go(){var p=route();if(p===last)return;var g=window.goatcounter;if(!g||typeof g.count!=='function'){if(tries++<40)setTimeout(go,250);return;}last=p;try{g.count({path:p});}catch(e){}}
+window.addEventListener('hashchange',go);if(document.readyState==='complete')go();else window.addEventListener('load',go);})();
+</script>
+<script data-goatcounter="https://rjedtech.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
