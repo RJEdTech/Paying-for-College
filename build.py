@@ -39,9 +39,9 @@ PAGES = [
     ('index.html', 'src/index.html', 'Paying for College · Regis Jesuit',
      'Free tools and plain answers for Regis Jesuit families paying for college: award letters, student and parent loans, scholarships, and what changed for 2026–27.', []),
     ('award-letters.html', 'src/award-letters.html', 'Award Letter Decoder · Paying for College',
-     'Compare up to four college financial aid offers: free money, loans, work-study, and the real net price over four years.', ['award-letters.js']),
+     'Compare up to four college financial aid offers: free money, loans, work-study, and the real net price over four years.', ['colleges.js', 'award-letters.js']),
     ('who-borrows.html', 'src/who-borrows.html', 'Who Borrows? · Paying for College',
-     'Compare a student borrowing federal loans first with parents borrowing it all through Parent PLUS, under the 2026 loan limits.', ['who-borrows.js']),
+     'Compare a student borrowing federal loans first with parents borrowing it all through Parent PLUS, under the 2026 loan limits.', ['colleges.js', 'who-borrows.js']),
 ]
 
 for out, src, title, desc, js in PAGES:

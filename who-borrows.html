@@ -9,7 +9,7 @@
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
-<link rel="stylesheet" href="pfc.css?v=202611101755">
+<link rel="stylesheet" href="pfc.css?v=202611101951">
 </head>
 <body>
 <header class="rj-masthead">
@@ -30,6 +30,16 @@
 <p class="lede">The same college bill can be borrowed in your student’s name, a parent’s name, or both. Enter your numbers to see what each choice costs, who owes it, and for how long.</p>
 <p class="privacy"><span aria-hidden="true">🔒</span><span>Everything stays on this device. Nothing you type is saved or sent.</span></p>
 <p class="small muted" id="fromname" hidden></p>
+
+<div class="card" id="quick" hidden>
+  <h4 style="margin-top:0">Quick check: no offer yet?</h4>
+  <p class="small muted">Pick a college and your family’s income to start from what families there paid on average. For your real numbers, use the college’s net price calculator or your award letter.</p>
+  <div class="grid2">
+    <div class="field"><label for="qc-college">College</label><select id="qc-college"></select></div>
+    <div class="field"><label for="qc-income">Family income</label><select id="qc-income"><option value="">Choose a range</option><option value="0">$0–$30,000</option><option value="1">$30,001–$48,000</option><option value="2">$48,001–$75,000</option><option value="3">$75,001–$110,000</option><option value="4">Over $110,000</option></select></div>
+  </div>
+  <div id="qc-note" aria-live="polite"></div>
+</div>
 
 <div class="card" id="form">
   <div class="grid2">
@@ -90,8 +100,9 @@ FAFSA® is a registered trademark of the U.S. Department of Education. CSS Profi
 © 2026 Jason Beyer, RJ Ed Tech · <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="license noopener">CC BY-NC 4.0</a>: free to share and adapt for non-commercial use, with credit.</p>
 </main>
 
-<script src="pfc.js?v=202611101755"></script>
-<script src="who-borrows.js?v=202611101755"></script>
+<script src="pfc.js?v=202611101951"></script>
+<script src="colleges.js?v=202611101951"></script>
+<script src="who-borrows.js?v=202611101951"></script>
 <!-- Anonymous page-view count (GoatCounter, rjedtech.goatcounter.com): no cookies, no personal data, nothing typed into the tools.
      Only the page path is sent; anything after ? in the address (such as a net price passed between tools) is never sent.
      A visit through the school's Securly filter (?scrlybrkr in the address) adds ?sd = school device; nothing else about the visitor is sent. -->

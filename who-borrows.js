@@ -171,8 +171,33 @@ document.addEventListener('DOMContentLoaded', function(){
     $('prate').value = (F.plus.rate * 100).toFixed(2); $('pfee').value = (F.plus.fee * 100).toFixed(3); render();
   });
   $('print').addEventListener('click', function(){ window.print(); });
+  if (P.collegeData().groups.length){
+    $('quick').hidden = false;
+    $('qc-college').innerHTML = P.collegeOptions('');
+    $('qc-college').addEventListener('change', quick);
+    $('qc-income').addEventListener('change', quick);
+  }
   render();
 });
+
+/* Quick check: fill the net price from the College Scorecard snapshot */
+function quick(){
+  var c = P.findCollege($('qc-college').value), inc = $('qc-income').value, note = $('qc-note'), m = P.money;
+  var y = P.collegeData().year, yr = ' (federal College Scorecard, most recent year reported)', yrCost = y ? ' (' + P.esc(y) + ' published cost)' : '';
+  if (!c){ note.innerHTML = ''; return; }
+  var calc = c.npc ? ' <a href="' + P.esc(c.npc) + '" target="_blank" rel="noopener">Net price calculator \u2197</a>' : '';
+  var v = null, msg = '';
+  if (P.netPricesApply(c)){
+    if (inc !== '' && c.nb[Number(inc)] != null){ v = c.nb[Number(inc)]; msg = 'Families earning ' + P.BRACKETS[Number(inc)] + ' who applied for aid paid ' + m(v) + ' a year on average at ' + P.esc(c.n) + ' after grants' + yr + '.'; }
+    else if (c.avg != null){ v = c.avg; msg = 'Families who applied for aid paid ' + m(v) + ' a year on average at ' + P.esc(c.n) + ' after grants' + yr + '. Choose your income range for a closer number.'; }
+  } else {
+    var k = P.collegeCost(c); v = k.tuition + k.housing + k.other;
+    msg = 'Full published cost for an out-of-state student at ' + P.esc(c.n) + ': ' + m(v) + ' a year' + yrCost + ', before any merit aid. Federal averages after grants there are for in-state students, so they don\u2019t fit a Colorado family.';
+  }
+  if (v != null){ $('net').value = Math.round(v).toLocaleString('en-US'); render(); }
+  else msg = 'No federal average is reported for that income range at ' + P.esc(c.n) + '.';
+  note.innerHTML = '<p class="small" style="margin:6px 0 0">' + msg + ' Costs have likely gone up since.' + calc + '</p>';
+}
 
 window.PFC_WB = { plan: plan, REPAY: REPAY };
 })();

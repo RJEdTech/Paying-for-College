@@ -16,5 +16,6 @@ Everything runs in the browser. Nothing a family types is saved or sent. GoatCou
 - Run `python3 build.py` to rebuild the three pages and `pfc.css` (masthead block + `base.css`).
 - Loan facts (rates, fees, limits, repayment tiers) are in `pfc.js` → `FACTS`. Update rates every July and fees every October.
 - To take the site out of draft, delete the `DRAFT` banner in `build.py` and rebuild.
+- Quick check menus read `colleges.js`, a snapshot of 68 colleges from the federal College Scorecard (2025–26 published costs; average net price by income from the most recent year reported). Source files are in `data/` (`ids.json`, `rows.json`, `npc.json`); `data/make_colleges.py "2025–26"` regenerates `colleges.js`. Refresh once a year. The site makes no calls to the Scorecard; no API key is stored here.
 
 © 2026 Jason Beyer, RJ Ed Tech · CC BY-NC 4.0

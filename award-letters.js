@@ -26,7 +26,7 @@ var EXAMPLES = [
 ];
 var schools = [];
 
-function blank(i){ return { name: '', tuition: '', housing: '', other: '', gCollege: '', gGov: '', gOutside: '', ws: '', sLoan: '', pLoan: '', xLoan: '', renew: 'same', gpa: '', outRenew: 'once', _i: i }; }
+function blank(i){ return { name: '', tuition: '', housing: '', other: '', gCollege: '', gGov: '', gOutside: '', ws: '', sLoan: '', pLoan: '', xLoan: '', renew: 'same', gpa: '', outRenew: 'once', cid: '', _i: i }; }
 function $(id){ return document.getElementById(id); }
 function fmtIn(v){ if (v === '' || v == null) return ''; return Number(v).toLocaleString('en-US'); }
 
@@ -37,6 +37,11 @@ function form(){
     var id = 's' + i;
     h += '<div class="school" data-i="' + i + '">';
     if (schools.length > 1) h += '<button type="button" class="rm no-print" data-rm="' + i + '">Remove</button>';
+    if (P.collegeData().groups.length){
+      h += '<div class="field"><label for="' + id + '-pick">Quick check<span class="hint">Start from a college\u2019s published numbers</span></label><select id="' + id + '-pick" data-pick>' + P.collegeOptions(s.cid) + '</select></div>';
+      var pc = s.cid ? P.findCollege(s.cid) : null;
+      if (pc) h += P.collegeNote(pc);
+    }
     h += '<div class="field sname"><label for="' + id + '-name">College ' + (i + 1) + '</label><input type="text" id="' + id + '-name" data-k="name" placeholder="College name" value="' + P.esc(s.name) + '" autocomplete="off"></div>';
     var groups = [['cost', 'Cost for one year'], ['free', 'Free money (no repaying)'], ['ws', 'Earned'], ['loan', 'Loans (repaid with interest)']];
     groups.forEach(function(g){
@@ -66,6 +71,15 @@ function form(){
       schools[i][k] = (k === 'name' || k === 'renew' || k === 'gpa' || k === 'outRenew') ? el.value : el.value;
       if (k === 'renew'){ var g = el.closest('.school').querySelector('[data-gpa]'); g.hidden = el.value !== 'gpa'; }
       render();
+    });
+  });
+  host.querySelectorAll('[data-pick]').forEach(function(sel){
+    sel.addEventListener('change', function(){
+      var i = Number(sel.closest('.school').getAttribute('data-i')), s = schools[i], c = P.findCollege(sel.value);
+      s.cid = sel.value;
+      if (c){ var k = P.collegeCost(c); s.name = c.n; s.tuition = k.tuition; s.housing = k.housing; s.other = k.other; }
+      form(); render();
+      var again = document.getElementById('s' + i + '-pick'); if (again) again.focus();
     });
   });
   host.querySelectorAll('[data-rm]').forEach(function(b){

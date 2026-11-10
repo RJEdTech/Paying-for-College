@@ -84,7 +84,47 @@ function moneyInputs(root){
   });
 }
 
-window.PFC = { FACTS: FACTS, parseMoney: parseMoney, parsePct: parsePct, money: money, round2: round2,
+/* ---- Quick check: college menus from the College Scorecard snapshot (colleges.js) ---- */
+var BRACKETS = ['$0–$30,000', '$30,001–$48,000', '$48,001–$75,000', '$75,001–$110,000', 'Over $110,000'];
+function collegeData(){ return window.PFC_COLLEGES || { year: '', groups: [] }; }
+function findCollege(id){
+  var gs = collegeData().groups;
+  for (var i = 0; i < gs.length; i++) for (var j = 0; j < gs[i].colleges.length; j++) if (String(gs[i].colleges[j].id) === String(id)) return gs[i].colleges[j];
+  return null;
+}
+function collegeOptions(selected){
+  var h = '<option value="">Choose a college (optional)</option>';
+  collegeData().groups.forEach(function(g){
+    h += '<optgroup label="' + esc(g.label) + '">';
+    g.colleges.forEach(function(c){ h += '<option value="' + c.id + '"' + (String(c.id) === String(selected) ? ' selected' : '') + '>' + esc(c.n) + '</option>'; });
+    h += '</optgroup>';
+  });
+  return h;
+}
+/* Colorado residents pay in-state tuition only at Colorado public colleges */
+function coloradoRate(c){ return c.pub && c.st === 'CO'; }
+function collegeCost(c){
+  var tuition = coloradoRate(c) ? c.tin : c.tout;
+  return { tuition: tuition || 0, housing: c.rb || 0, other: (c.bk || 0) + (c.oth || 0) };
+}
+/* Federal average net prices apply to a Colorado family only at private colleges and Colorado publics */
+function netPricesApply(c){ return !c.pub || c.st === 'CO'; }
+function collegeNote(c){
+  var y = collegeData().year, h = '';
+  h += '<p class="small muted" style="margin:6px 0">Published cost' + (y ? ' for ' + esc(y) : '') + ' (federal College Scorecard). Costs have likely gone up since; replace these with the numbers on your offer.' + (c.pub && c.st !== 'CO' ? ' Out-of-state tuition shown.' : '') + '</p>';
+  if (netPricesApply(c) && c.nb && c.nb.some(function(v){ return v != null; })){
+    h += '<details class="more small" style="margin:6px 0"><summary>What families paid after grants</summary><p class="small muted" style="margin:0 0 6px">Average yearly price after grants for first-year students who applied for federal aid' + (c.pub ? ' (in-state)' : '') + ', by family income. Federal data, most recent year reported:</p><dl class="kv">';
+    c.nb.forEach(function(v, i){ h += '<dt>' + BRACKETS[i] + '</dt><dd>' + (v == null ? 'not reported' : money(v)) + '</dd>'; });
+    h += '</dl></details>';
+  } else if (c.pub && c.st !== 'CO') {
+    h += '<p class="small muted" style="margin:6px 0">Federal averages after grants at this college are for its own state’s residents, so they don’t fit a Colorado family. Some out-of-state students get merit aid; the calculator below shows yours.</p>';
+  }
+  if (c.npc) h += '<p class="small" style="margin:6px 0"><a href="' + esc(c.npc) + '" target="_blank" rel="noopener">This college’s net price calculator ↗</a></p>';
+  return h;
+}
+
+window.PFC = { FACTS: FACTS, BRACKETS: BRACKETS, findCollege: findCollege, collegeOptions: collegeOptions, collegeCost: collegeCost,
+  netPricesApply: netPricesApply, collegeNote: collegeNote, coloradoRate: coloradoRate, collegeData: collegeData, parseMoney: parseMoney, parsePct: parsePct, money: money, round2: round2,
   pctText: pctText, esc: esc, payment: payment, tierYears: tierYears, themeInit: themeInit, moneyInputs: moneyInputs };
 document.addEventListener('DOMContentLoaded', themeInit);
 })();
