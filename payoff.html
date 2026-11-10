@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Loan Payoff Calculator · Paying for College</title>
+<meta name="description" content="Monthly payment, payoff date and interest for a student or Parent PLUS loan at today’s rates, with and without extra payments.">
+<script>try{var t=localStorage.getItem('rj-theme');if(t==='dark'||t==='light')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="stylesheet" href="pfc.css?v=202611102034">
+</head>
+<body>
+<header class="rj-masthead">
+  <div class="hl">
+    <img class="rj-mark" src="data:image/png;base64,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" alt="RJ">
+    <div>
+      <h1>Paying for College</h1>
+      <p class="tagline">For Regis Jesuit families</p>
+    </div>
+  </div>
+  <div class="mh-right"><button type="button" id="theme" class="mh-btn" aria-pressed="false">Dark mode</button></div>
+</header>
+
+<main class="wrap">
+<p class="crumb no-print"><a href="./">← Paying for College</a></p>
+<p class="draft" role="note"><b>Draft for review by RJ College Counseling.</b> Not yet shared with families. Every number links to its source.</p>
+<h2>Loan Payoff Calculator</h2>
+<p class="lede">How much will the payment be each month, and when will it be gone? Enter a loan balance, or start from a typical amount, and see it paid off at today’s rates. Then try paying a little more each month.</p>
+<p class="privacy"><span aria-hidden="true">🔒</span><span>Everything stays on this device. Nothing you type is saved or sent.</span></p>
+<p class="small muted" id="from" hidden></p>
+
+<div class="card">
+  <h4 style="margin-top:0">Start from a typical amount</h4>
+  <div class="starts">
+    <button type="button" class="start" data-start="29560" data-type="s"><b>$29,560</b><span>Average debt of bachelor’s graduates who borrowed (2023–24)</span></button>
+    <button type="button" class="start" data-start="27000" data-type="s"><b>$27,000</b><span>Most a student can borrow in federal loans over 4 years</span></button>
+    <button type="button" class="start" data-start="31000" data-type="s"><b>$31,000</b><span>Federal limit for a dependent undergraduate</span></button>
+    <button type="button" class="start" data-start="65000" data-type="p"><b>$65,000</b><span>Most a parent can borrow in Parent PLUS per student</span></button>
+  </div>
+  <p class="src" style="margin:8px 0 0">Sources: <a href="https://research.collegeboard.org/trends/student-aid" target="_blank" rel="noopener">College Board, Trends in Student Aid 2025</a>; <a href="https://www2.mu.edu/central/financial-aid/loans/undergraduate-unsubsidized.php" target="_blank" rel="noopener">Marquette (federal limits)</a>; <a href="https://undergradaid.northwestern.edu/types-of-aid/loans/plus-loan.html" target="_blank" rel="noopener">Northwestern (Parent PLUS)</a>. Interest that builds during school is not included in these starting amounts; <a href="who-borrows.html">Who Borrows?</a> adds it.</p>
+</div>
+
+<div class="card" id="form">
+  <div class="grid2">
+    <div class="field"><label for="type">Type of loan</label><select id="type"><option value="s">Student federal loan</option><option value="p">Parent PLUS</option><option value="x">Private loan</option></select></div>
+    <div class="field"><label for="bal">Balance when payments start<span class="hint">What is owed after graduation, including interest added during school</span></label><div class="money"><input type="text" inputmode="decimal" id="bal" value="29,560"></div></div>
+    <div class="field" id="ratewrap"><label for="rate">Interest rate<span class="hint">Fixed federal rate</span></label><div class="pct"><input type="text" inputmode="decimal" id="rate"></div></div>
+    <div class="field"><label for="term">Repayment plan</label><select id="term"><option value="auto">Federal standard (set by the balance)</option><option value="10">10 years</option><option value="15">15 years</option><option value="20">20 years</option><option value="25">25 years</option></select><span class="hint" id="autonote"></span></div>
+    <div class="field"><label for="extra">Extra each month (optional)<span class="hint">Goes straight to the balance</span></label><div class="money"><input type="text" inputmode="decimal" id="extra" value="" placeholder="0"></div></div>
+    <div class="field"><label for="starty">Payments start<span class="hint">About 6 months after graduation</span></label><select id="starty"></select></div>
+    <div class="field"><label for="pay">Yearly pay (optional)<span class="hint">Before tax. Shows the payment as a share of pay.</span></label><div class="money"><input type="text" inputmode="decimal" id="pay" value="" placeholder="e.g. 55,000"></div></div>
+  </div>
+</div>
+
+<div id="out" aria-live="polite"></div>
+<div class="btns no-print"><button type="button" class="btn ghost" id="print">Print or save as PDF</button></div>
+
+<details class="more">
+  <summary>How the numbers are worked out</summary>
+  <ul class="qs">
+    <li>The monthly payment is the same every month and pays the loan off over the plan’s years. Federal loans made on or after July 1, 2026 use the Tiered Standard plan: 10 years under $25,000, 15 years up to $50,000, 20 years up to $100,000, and 25 years above that. <span class="src"><a href="https://www.elfi.com/understanding-parent-plus-loan-changes-in-2026/" target="_blank" rel="noopener">ELFI</a></span></li>
+    <li>Interest is figured each month on what is still owed. An extra payment lowers the balance right away, so less interest builds after it.</li>
+    <li>Rates shown are for federal loans made in 2026–27 (student 6.52%, Parent PLUS 9.07%). Each year’s loans get that year’s rate.</li>
+    <li>The 10%-of-pay line is a common guideline, not a rule.</li>
+    <li>These are planning estimates. The loan servicer has the official numbers.</li>
+  </ul>
+</details>
+<p class="foot">RJ Ed Tech · Paying for College · Estimates for planning, not financial, tax or legal advice. Facts checked November 10, 2026.<br>
+Questions about your student’s college plans? <a href="https://regisjesuit.com/student-experience/college-counseling" target="_blank" rel="noopener">Contact RJ College Counseling</a>.<br>
+RJ staff: <a href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=4SwuQZc-CEClZjjFdYLisQzihhIB-7hPp9L3AOSeJONUOVJaVTVMOE9YMFNSVVM3TUNOOFVQR1pYTi4u&amp;rc59cb41123d3497584d2ca10cb9e1c54=%22Paying%20for%20College%22" target="_blank" rel="noopener">report a problem or suggest an idea</a> (Microsoft Form, RJ sign-in).<br>
+FAFSA® is a registered trademark of the U.S. Department of Education. CSS Profile is a College Board program. Neither is affiliated with, or endorses, this site.<br>
+© 2026 Jason Beyer, RJ Ed Tech · <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="license noopener">CC BY-NC 4.0</a>: free to share and adapt for non-commercial use, with credit.</p>
+</main>
+
+<script src="pfc.js?v=202611102034"></script>
+<script src="payoff.js?v=202611102034"></script>
+<!-- Anonymous page-view count (GoatCounter, rjedtech.goatcounter.com): no cookies, no personal data, nothing typed into the tools.
+     Only the page path is sent; anything after ? in the address (such as a net price passed between tools) is never sent.
+     A visit through the school's Securly filter (?scrlybrkr in the address) adds ?sd = school device; nothing else about the visitor is sent. -->
+<script>
+window.goatcounter={no_onload:true};
+(function(){var last=null,tries=0;
+function route(){var h=(location.hash||'').slice(1).split(/[=@?&]/)[0].replace(/[^A-Za-z0-9_-]/g,'').slice(0,40);return location.pathname.replace(/index\.html$/,'')+(h?'#'+h:'')+(/scrlybrkr/.test(location.search)?'?sd':'');}
+function go(){var p=route();if(p===last)return;var g=window.goatcounter;if(!g||typeof g.count!=='function'){if(tries++<40)setTimeout(go,250);return;}last=p;try{g.count({path:p});}catch(e){}}
+window.addEventListener('hashchange',go);if(document.readyState==='complete')go();else window.addEventListener('load',go);})();
+</script>
+<script data-goatcounter="https://rjedtech.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

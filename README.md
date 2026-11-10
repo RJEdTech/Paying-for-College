@@ -8,6 +8,7 @@ Live: https://rjedtech.github.io/Paying-for-College/
 | `index.html` | Hub: the tools, where to go for everything else, what changed for 2026–27, questions for aid offices |
 | `award-letters.html` | Award Letter Decoder: up to 4 offers, free money vs. loans vs. work-study, net price for 1 and 4 years |
 | `who-borrows.html` | Who Borrows?: student Direct Loans first vs. parents borrowing it all (Parent PLUS), under the 2026 limits |
+| `payoff.html` | Loan Payoff Calculator: monthly payment, payoff date and interest at today's rates, with extra payments; typical starting amounts; linked from Who Borrows? |
 
 Everything runs in the browser. Nothing a family types is saved or sent. GoatCounter counts page views only.
 

@@ -1,0 +1,41 @@
+<h2>Loan Payoff Calculator</h2>
+<p class="lede">How much will the payment be each month, and when will it be gone? Enter a loan balance, or start from a typical amount, and see it paid off at today’s rates. Then try paying a little more each month.</p>
+<p class="privacy"><span aria-hidden="true">🔒</span><span>Everything stays on this device. Nothing you type is saved or sent.</span></p>
+<p class="small muted" id="from" hidden></p>
+
+<div class="card">
+  <h4 style="margin-top:0">Start from a typical amount</h4>
+  <div class="starts">
+    <button type="button" class="start" data-start="29560" data-type="s"><b>$29,560</b><span>Average debt of bachelor’s graduates who borrowed (2023–24)</span></button>
+    <button type="button" class="start" data-start="27000" data-type="s"><b>$27,000</b><span>Most a student can borrow in federal loans over 4 years</span></button>
+    <button type="button" class="start" data-start="31000" data-type="s"><b>$31,000</b><span>Federal limit for a dependent undergraduate</span></button>
+    <button type="button" class="start" data-start="65000" data-type="p"><b>$65,000</b><span>Most a parent can borrow in Parent PLUS per student</span></button>
+  </div>
+  <p class="src" style="margin:8px 0 0">Sources: <a href="https://research.collegeboard.org/trends/student-aid" target="_blank" rel="noopener">College Board, Trends in Student Aid 2025</a>; <a href="https://www2.mu.edu/central/financial-aid/loans/undergraduate-unsubsidized.php" target="_blank" rel="noopener">Marquette (federal limits)</a>; <a href="https://undergradaid.northwestern.edu/types-of-aid/loans/plus-loan.html" target="_blank" rel="noopener">Northwestern (Parent PLUS)</a>. Interest that builds during school is not included in these starting amounts; <a href="who-borrows.html">Who Borrows?</a> adds it.</p>
+</div>
+
+<div class="card" id="form">
+  <div class="grid2">
+    <div class="field"><label for="type">Type of loan</label><select id="type"><option value="s">Student federal loan</option><option value="p">Parent PLUS</option><option value="x">Private loan</option></select></div>
+    <div class="field"><label for="bal">Balance when payments start<span class="hint">What is owed after graduation, including interest added during school</span></label><div class="money"><input type="text" inputmode="decimal" id="bal" value="29,560"></div></div>
+    <div class="field" id="ratewrap"><label for="rate">Interest rate<span class="hint">Fixed federal rate</span></label><div class="pct"><input type="text" inputmode="decimal" id="rate"></div></div>
+    <div class="field"><label for="term">Repayment plan</label><select id="term"><option value="auto">Federal standard (set by the balance)</option><option value="10">10 years</option><option value="15">15 years</option><option value="20">20 years</option><option value="25">25 years</option></select><span class="hint" id="autonote"></span></div>
+    <div class="field"><label for="extra">Extra each month (optional)<span class="hint">Goes straight to the balance</span></label><div class="money"><input type="text" inputmode="decimal" id="extra" value="" placeholder="0"></div></div>
+    <div class="field"><label for="starty">Payments start<span class="hint">About 6 months after graduation</span></label><select id="starty"></select></div>
+    <div class="field"><label for="pay">Yearly pay (optional)<span class="hint">Before tax. Shows the payment as a share of pay.</span></label><div class="money"><input type="text" inputmode="decimal" id="pay" value="" placeholder="e.g. 55,000"></div></div>
+  </div>
+</div>
+
+<div id="out" aria-live="polite"></div>
+<div class="btns no-print"><button type="button" class="btn ghost" id="print">Print or save as PDF</button></div>
+
+<details class="more">
+  <summary>How the numbers are worked out</summary>
+  <ul class="qs">
+    <li>The monthly payment is the same every month and pays the loan off over the plan’s years. Federal loans made on or after July 1, 2026 use the Tiered Standard plan: 10 years under $25,000, 15 years up to $50,000, 20 years up to $100,000, and 25 years above that. <span class="src"><a href="https://www.elfi.com/understanding-parent-plus-loan-changes-in-2026/" target="_blank" rel="noopener">ELFI</a></span></li>
+    <li>Interest is figured each month on what is still owed. An extra payment lowers the balance right away, so less interest builds after it.</li>
+    <li>Rates shown are for federal loans made in 2026–27 (student 6.52%, Parent PLUS 9.07%). Each year’s loans get that year’s rate.</li>
+    <li>The 10%-of-pay line is a common guideline, not a rule.</li>
+    <li>These are planning estimates. The loan servicer has the official numbers.</li>
+  </ul>
+</details>

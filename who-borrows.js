@@ -170,6 +170,8 @@ function whoBlock(title, note, r, ageNow, inp, kind){
   if (kind === 's' && inp.salary > 0) h += '<dt>Share of starting pay (before tax)</dt><dd>' + P.pctText(r.monthly / (inp.salary / 12), 1) + '</dd>';
   h += '</dl>';
   if (note) h += '<p class="small muted">' + note + '</p>';
+  var rate = kind === 'p' ? inp.pRate : kind === 'x' ? inp.privRate : inp.dRate;
+  h += '<p class="small no-print" style="margin:6px 0 0"><a href="payoff.html?bal=' + Math.round(r.balance) + '&amp;rate=' + (rate * 100).toFixed(2) + '&amp;type=' + kind + '&amp;who=' + encodeURIComponent(title) + '">See payoff options for this loan \u2192</a></p>';
   return h + '</details>';
 }
 

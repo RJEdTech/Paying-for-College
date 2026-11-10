@@ -42,6 +42,8 @@ PAGES = [
      'Compare up to four college financial aid offers: free money, loans, work-study, and the real net price over four years.', ['colleges.js', 'award-letters.js']),
     ('who-borrows.html', 'src/who-borrows.html', 'Who Borrows? · Paying for College',
      'Compare a student borrowing federal loans first with parents borrowing it all through Parent PLUS, under the 2026 loan limits.', ['colleges.js', 'who-borrows.js']),
+    ('payoff.html', 'src/payoff.html', 'Loan Payoff Calculator \u00b7 Paying for College',
+     'Monthly payment, payoff date and interest for a student or Parent PLUS loan at today\u2019s rates, with and without extra payments.', ['payoff.js']),
 ]
 
 for out, src, title, desc, js in PAGES:
