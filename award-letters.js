@@ -134,6 +134,18 @@ function render(){
   var sorted = res.slice().sort(function(a, b){ return a.net4 - b.net4; });
   var h = '';
   if (res.length > 1){
+    /* Side by side, one scale: how each offer splits its cost of attendance */
+    var maxCoa = Math.max.apply(null, sorted.map(function(r){ return Math.max(r.coa, r.free + r.loans + r.ws); })) || 1;
+    var sg = function(v, c, t, tot){ return v > 0 ? '<span style="width:' + (v / tot * 100).toFixed(2) + '%;background:var(' + c + ')" title="' + t + ': ' + m(v) + '"></span>' : ''; };
+    h += '<div class="card"><h4 style="margin-top:0">Side by side, one year</h4><div class="ychart cmp">';
+    sorted.forEach(function(r){
+      var tot = Math.max(r.coa, r.free + r.loans + r.ws);
+      h += '<div class="yrow cmprow"><span class="ylab">' + P.esc(r.name) + '</span><div class="ytrack" role="img" aria-label="' + P.esc(r.name) + ': cost ' + m(r.coa) + ', free money ' + m(r.free) + ', loans ' + m(r.loans) + ', work-study ' + m(r.ws) + ', still to pay ' + m(r.left) + '"><div class="bar" style="width:' + (tot / maxCoa * 100).toFixed(2) + '%">' +
+        sg(r.free, '--c-free', 'Free money', tot) + sg(r.loans, '--c-loan', 'Loans', tot) + sg(r.ws, '--c-ws', 'Work-study', tot) + sg(r.left, '--c-gap', 'Still to pay', tot) +
+        '</div></div><span class="yval num">' + m(r.net) + '<br><span class="small muted">net price</span></span></div>';
+    });
+    h += '</div><div class="legend"><span><i class="dot" style="background:var(--c-free)"></i>Free money</span><span><i class="dot" style="background:var(--c-loan)"></i>Loans</span><span><i class="dot" style="background:var(--c-ws)"></i>Work-study</span><span><i class="dot" style="background:var(--c-gap)"></i>Still to pay</span></div>' +
+      '<p class="small muted" style="margin:0">Bar length = cost of attendance, on the same scale for every college. Net price = everything except the green part.</p></div>';
     h += '<div class="tbl-wrap"><table><thead><tr><th>College</th><th class="r">Cost (1 year)</th><th class="r">Free money</th><th class="r">Net price, year 1</th><th class="r">Loans in offer</th><th class="r">Net price, 4 years</th></tr></thead><tbody>';
     sorted.forEach(function(r){
       h += '<tr><td>' + P.esc(r.name) + '</td><td class="r">' + m(r.coa) + '</td><td class="r">' + m(r.free) + '</td><td class="r"><b>' + m(r.net) + '</b></td><td class="r">' + m(r.loans) + '</td><td class="r"><b>' + m(r.net4) + '</b></td></tr>';

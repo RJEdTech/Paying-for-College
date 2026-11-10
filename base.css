@@ -3,20 +3,20 @@
   --bg:#f3f3f1; --card:#ffffff; --card2:#f7f7f5; --fg:#1c1c1f; --muted:#5d5d63; --line:#d8d8d3;
   --rj:#C11430; --rj-ink:#a8102a; --focus:#1f6feb; --good:#1b7339; --bad:#b3261e;
   --warn:#c27a00; --warn-ink:#6e4300; --warn-bg:#fff4dc; --info-bg:#eef4fd; --info-ink:#1d4f9a;
-  --c-free:#1b7339; --c-loan:#c27a00; --c-ws:#2d6bd2; --c-gap:#C11430; --c-uncov:#5d5d63;
+  --c-free:#1b7339; --c-loan:#c27a00; --c-ws:#2d6bd2; --c-gap:#C11430; --c-uncov:#5d5d63; --c-fam:#0f8b8d; --c-stu:#7b3fe4; --c-priv:#8a5a2b;
   --font:"Segoe UI",system-ui,-apple-system,Roboto,"Helvetica Neue",Arial,sans-serif;
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
   --bg:#15161a; --card:#1d1f24; --card2:#24272d; --fg:#ececef; --muted:#a2a2aa; --line:#353840;
   --rj-ink:#ed516a; --focus:#6ea8ff; --good:#5cc27f; --bad:#f2827a;
   --warn:#f2b24c; --warn-ink:#f7cd86; --warn-bg:#33281a; --info-bg:#17222f; --info-ink:#9cc3ff;
-  --c-free:#5cc27f; --c-loan:#f2b24c; --c-ws:#5c9bff; --c-gap:#ed516a; --c-uncov:#a2a2aa;
+  --c-free:#5cc27f; --c-loan:#f2b24c; --c-ws:#5c9bff; --c-gap:#ed516a; --c-uncov:#a2a2aa; --c-fam:#4cc9c0; --c-stu:#a77dff; --c-priv:#d9a066;
   color-scheme:dark}}
 :root[data-theme="dark"]{
   --bg:#15161a; --card:#1d1f24; --card2:#24272d; --fg:#ececef; --muted:#a2a2aa; --line:#353840;
   --rj-ink:#ed516a; --focus:#6ea8ff; --good:#5cc27f; --bad:#f2827a;
   --warn:#f2b24c; --warn-ink:#f7cd86; --warn-bg:#33281a; --info-bg:#17222f; --info-ink:#9cc3ff;
-  --c-free:#5cc27f; --c-loan:#f2b24c; --c-ws:#5c9bff; --c-gap:#ed516a; --c-uncov:#a2a2aa;
+  --c-free:#5cc27f; --c-loan:#f2b24c; --c-ws:#5c9bff; --c-gap:#ed516a; --c-uncov:#a2a2aa; --c-fam:#4cc9c0; --c-stu:#a77dff; --c-priv:#d9a066;
   color-scheme:dark}
 
 *{box-sizing:border-box}
@@ -130,6 +130,36 @@ input[type=text],input[type=number],select{font:inherit;font-size:16px;width:100
 .who{border-top:1px solid var(--line);margin-top:10px;padding-top:10px}
 .who h5{font-size:15px;margin:0 0 4px}
 .uncov{background:var(--warn-bg);color:var(--warn-ink);border-radius:8px;padding:8px 10px;font-size:15px;margin:10px 0 0}
+
+/* Charts (plain HTML bars; every bar has its number written beside it) */
+.chart-h{font-size:14px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);margin:16px 0 6px}
+.ychart{display:flex;flex-direction:column;gap:6px;margin:4px 0 6px}
+.yrow{display:grid;grid-template-columns:52px 1fr 78px;align-items:center;gap:8px;font-size:14px}
+.ylab{color:var(--muted)}
+.ytrack .bar{margin:0;height:22px}
+.yval{text-align:right}
+.tl{margin:4px 0 6px;padding-right:12px}
+.tlrow{display:grid;grid-template-columns:62px 1fr;align-items:center;gap:8px;font-size:14px;margin:0 0 6px}
+.tllab{color:var(--muted)}
+.tltrack{position:relative;height:38px;border-left:1px solid var(--line)}
+.tlbar{position:absolute;top:2px;height:14px;border-radius:7px}
+.tlbar.school{background:var(--line)}
+.tlnote{position:absolute;top:18px;white-space:nowrap;font-size:13px;color:var(--fg)}
+.tlrow:first-child .tltrack{height:18px}
+.tlaxis{position:relative;height:18px;border-top:1px solid var(--line)}
+.tlaxis span{position:absolute;top:2px;transform:translateX(-50%);font-size:13px;color:var(--muted)}
+.costbar .bar{height:18px}
+.dchart{display:flex;flex-direction:column;gap:8px;margin:8px 0}
+.drow{display:grid;grid-template-columns:150px 1fr 104px;align-items:center;gap:10px;width:100%;text-align:left;font:inherit;font-size:14px;color:var(--fg);
+  background:var(--card);border:1px solid var(--line);border-radius:10px;padding:8px 10px;cursor:pointer}
+.drow:hover{border-color:var(--rj)}
+.drow.cur{border:2px solid var(--rj);padding:7px 9px}
+.drow .bar{margin:0;height:24px}
+.dval{text-align:right}
+.cmp .cmprow{grid-template-columns:170px 1fr 96px}
+.cmp .ylab{color:var(--fg);font-weight:600;line-height:1.25}
+@media(max-width:600px){.cmp .cmprow{grid-template-columns:1fr 90px}.cmp .ytrack{grid-column:1 / -1;grid-row:2}}
+@media(max-width:600px){.drow{grid-template-columns:1fr 92px}.drow .dtrack{grid-column:1 / -1;grid-row:2}.tlnote{left:0!important;white-space:normal;width:100%;top:20px}.tltrack{height:44px}.tlrow{grid-template-columns:54px 1fr}}
 
 /* Footer */
 .foot{margin-top:36px;padding-top:14px;border-top:1px solid var(--line);font-size:14px;color:var(--muted)}

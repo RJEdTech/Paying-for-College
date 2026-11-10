@@ -18,12 +18,14 @@
     <div class="field"><label for="net">Net price for one year<span class="hint">Cost after grants and scholarships. Get it from the Award Letter Decoder or a college’s net price calculator.</span></label><div class="money"><input type="text" inputmode="decimal" id="net" value="28,000"></div></div>
     <div class="field"><label for="family">Your family can pay each year<span class="hint">From savings, a 529 and income, without borrowing</span></label><div class="money"><input type="text" inputmode="decimal" id="family" value="12,000"></div></div>
     <div class="field"><label for="studentpay">Your student can pay each year<span class="hint">Summer job, work-study, savings</span></label><div class="money"><input type="text" inputmode="decimal" id="studentpay" value="2,000"></div></div>
+    <div class="field"><label for="down">Savings you’ll put down (optional)<span class="hint">One amount for all four years, such as a 529 balance. Only the rest is financed.</span></label><div class="money"><input type="text" inputmode="decimal" id="down" value="" placeholder="0"></div></div>
+    <div class="field"><label for="downmode">Use the savings<span class="hint">Early years’ loans build interest the longest</span></label><select id="downmode"><option value="first">First years first</option><option value="even">Spread over 4 years</option></select></div>
     <div class="field"><label for="grow">Costs rise each year by<span class="hint">Your assumption</span></label><div class="pct"><input type="text" inputmode="decimal" id="grow" value="3"></div></div>
     <div class="field"><label for="parentage">Parent’s age when your student starts college<span class="hint">Used to show your age at the last payment</span></label><input type="text" inputmode="numeric" id="parentage" value="50"></div>
     <div class="field"><label for="salary">Your student’s expected starting pay (optional)<span class="hint">Yearly, before tax. Shows the payment as a share of pay.</span></label><div class="money"><input type="text" inputmode="decimal" id="salary" value=""></div></div>
     <div class="field"><label for="privrate">Private loan rate, only if federal loans fall short (optional)<span class="hint">Rates depend on credit. Use a real quote.</span></label><div class="pct"><input type="text" inputmode="decimal" id="privrate" value="" placeholder="leave blank"></div></div>
   </div>
-  <p style="margin:4px 0 0">Amount to borrow in year 1: <b id="gapline" class="num"></b> <span class="small muted">(net price − what your family and student can pay)</span></p>
+  <p style="margin:4px 0 0">Left to finance over 4 years: <b id="gapline" class="num"></b> <span class="small muted" id="gapsub"></span></p>
   <details class="more" style="margin:12px 0 0">
     <summary>Loan rates and fees (2026–27)</summary>
     <div class="grid2">
@@ -38,6 +40,10 @@
 </div>
 
 <div id="out" aria-live="polite"></div>
+
+<h3>Lay down this much, finance the rest</h3>
+<p>Each bar is one choice: how much savings to put down, and what the family pays in all once every loan is paid off. Tap a bar to try that amount.</p>
+<div id="downout" aria-live="polite"></div>
 <div class="btns no-print"><button type="button" class="btn ghost" id="print">Print or save as PDF</button></div>
 
 <h3>The rules behind the numbers</h3>
@@ -56,6 +62,7 @@
 <details class="more">
   <summary>How the numbers are worked out</summary>
   <ul class="qs">
+    <li>Each year: net price (rising by your %) − what your family and student pay from income − savings put down = the amount to finance. Savings go to the first years’ bills unless you choose to spread them evenly.</li>
     <li>Plan A uses the student’s federal loan first, up to the yearly limit, then Parent PLUS for the rest. Plan B uses Parent PLUS for all of it.</li>
     <li>Fees come out of each loan, so a family borrows a little more than it needs. For example, $20,000 of Parent PLUS delivers $19,154.</li>
     <li>Each year’s loan is paid out in two halves, in August and January. No payments are made during school; interest builds and is added to the balance when payments start, 6 months after graduation. Parents can ask for this same deferment, or start paying sooner and pay less interest.</li>
