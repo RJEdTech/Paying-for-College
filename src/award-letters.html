@@ -1,0 +1,46 @@
+<h2>Award Letter Decoder</h2>
+<p class="lede">Award letters often mix free money with loans and call all of it “aid.” Type each college’s numbers below to see what you would really pay, side by side.</p>
+<p class="privacy"><span aria-hidden="true">🔒</span><span>Everything stays on this device. Nothing you type is saved or sent, so print or download your comparison before you close the page.</span></p>
+
+<div class="btns no-print">
+  <button type="button" class="btn" id="example">Try it with an example</button>
+  <button type="button" class="btn ghost" id="clear">Clear all</button>
+</div>
+
+<div class="card">
+  <div class="grid2">
+    <div class="field"><label for="grow">Costs rise each year by<span class="hint">Your assumption. Ask each college how much its costs went up last year.</span></label><div class="pct"><input type="text" inputmode="decimal" id="grow" value="3"></div></div>
+  </div>
+  <p class="small muted" style="margin:0">Copy each line from the offer. A line the offer doesn’t have stays blank. Use one year’s amounts; the four-year estimate is worked out for you.</p>
+</div>
+
+<div id="schools" class="schools"></div>
+<div class="btns no-print"><button type="button" class="btn ghost" id="add">+ Add a college (up to 4)</button></div>
+
+<h3>What each offer really costs</h3>
+<div id="results" aria-live="polite"></div>
+<div class="btns no-print">
+  <button type="button" class="btn ghost" id="print">Print or save as PDF</button>
+  <button type="button" class="btn ghost" id="csv">Download for Excel (CSV)</button>
+</div>
+
+<h3>Before you decide: ask each financial aid office</h3>
+<ol class="qs">
+  <li>Is this offer for 2027–28, or does it use last year’s costs?</li>
+  <li>Which grants renew each year, and what GPA or credits keep them?</li>
+  <li>If my student wins an outside scholarship, do you lower loans first or your own grants?</li>
+  <li>Are books, travel and personal costs included in the cost you listed?</li>
+  <li>Can we appeal this offer if our finances changed, or if another college offered more?</li>
+  <li>When is the first bill due, and is there a monthly payment plan?</li>
+</ol>
+
+<details class="more">
+  <summary>How the numbers are worked out</summary>
+  <ul class="qs">
+    <li><b>Net price</b> = cost of attendance − free money (grants and scholarships). This is the price your family covers with savings, income or loans.</li>
+    <li><b>Still to pay</b> = net price − the loans and work-study in the offer. Accepting the loans moves that part of the cost into the future; it doesn’t remove it.</li>
+    <li><b>First bill</b> counts only tuition and housing, the parts a college bills. Books, travel and personal costs are real but are paid as you go.</li>
+    <li><b>Four years:</b> costs rise by the rate you choose. College awards stay the same each year unless you mark them first-year only. Federal and state grants are assumed to repeat (they depend on each year’s FAFSA). Outside scholarships count for year 1 only unless you mark that they renew.</li>
+    <li>These are planning estimates, not a bill. The college’s financial aid office has the final numbers.</li>
+  </ul>
+</details>

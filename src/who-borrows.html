@@ -1,0 +1,57 @@
+<h2>Who Borrows? Student loans vs. Parent PLUS</h2>
+<p class="lede">The same college bill can be borrowed in your student’s name, a parent’s name, or both. Enter your numbers to see what each choice costs, who owes it, and for how long.</p>
+<p class="privacy"><span aria-hidden="true">🔒</span><span>Everything stays on this device. Nothing you type is saved or sent.</span></p>
+<p class="small muted" id="fromname" hidden></p>
+
+<div class="card" id="form">
+  <div class="grid2">
+    <div class="field"><label for="net">Net price for one year<span class="hint">Cost after grants and scholarships. Get it from the Award Letter Decoder or a college’s net price calculator.</span></label><div class="money"><input type="text" inputmode="decimal" id="net" value="28,000"></div></div>
+    <div class="field"><label for="family">Your family can pay each year<span class="hint">From savings, a 529 and income, without borrowing</span></label><div class="money"><input type="text" inputmode="decimal" id="family" value="12,000"></div></div>
+    <div class="field"><label for="studentpay">Your student can pay each year<span class="hint">Summer job, work-study, savings</span></label><div class="money"><input type="text" inputmode="decimal" id="studentpay" value="2,000"></div></div>
+    <div class="field"><label for="grow">Costs rise each year by<span class="hint">Your assumption</span></label><div class="pct"><input type="text" inputmode="decimal" id="grow" value="3"></div></div>
+    <div class="field"><label for="parentage">Parent’s age when your student starts college<span class="hint">Used to show your age at the last payment</span></label><input type="text" inputmode="numeric" id="parentage" value="50"></div>
+    <div class="field"><label for="salary">Your student’s expected starting pay (optional)<span class="hint">Yearly, before tax. Shows the payment as a share of pay.</span></label><div class="money"><input type="text" inputmode="decimal" id="salary" value=""></div></div>
+    <div class="field"><label for="privrate">Private loan rate, only if federal loans fall short (optional)<span class="hint">Rates depend on credit. Use a real quote.</span></label><div class="pct"><input type="text" inputmode="decimal" id="privrate" value="" placeholder="leave blank"></div></div>
+  </div>
+  <p style="margin:4px 0 0">Amount to borrow in year 1: <b id="gapline" class="num"></b> <span class="small muted">(net price − what your family and student can pay)</span></p>
+  <details class="more" style="margin:12px 0 0">
+    <summary>Loan rates and fees (2026–27)</summary>
+    <div class="grid2">
+      <div class="field"><label for="drate">Student loan rate</label><div class="pct"><input type="text" inputmode="decimal" id="drate"></div></div>
+      <div class="field"><label for="dfee">Student loan fee</label><div class="pct"><input type="text" inputmode="decimal" id="dfee"></div></div>
+      <div class="field"><label for="prate">Parent PLUS rate</label><div class="pct"><input type="text" inputmode="decimal" id="prate"></div></div>
+      <div class="field"><label for="pfee">Parent PLUS fee</label><div class="pct"><input type="text" inputmode="decimal" id="pfee"></div></div>
+    </div>
+    <p class="small muted">Rates are set each July for loans made that year; fees change each October. Later years use these numbers. Sources: <a href="https://financial-aid.catholic.edu/financial-aid-basics/direct-loan-fees-interest.html" target="_blank" rel="noopener">Catholic University</a>, <a href="https://www.union.edu/financial-aid-family-financing/types-aid/loans/parent-plus-loans" target="_blank" rel="noopener">Union College</a>.</p>
+    <button type="button" class="btn ghost" id="reset-rates">Reset to 2026–27</button>
+  </details>
+</div>
+
+<div id="out" aria-live="polite"></div>
+<div class="btns no-print"><button type="button" class="btn ghost" id="print">Print or save as PDF</button></div>
+
+<h3>The rules behind the numbers</h3>
+<div class="tbl-wrap"><table>
+<thead><tr><th></th><th>Student: Direct Loan</th><th>Parent: Parent PLUS</th></tr></thead>
+<tbody>
+<tr><td>Whose name</td><td>Student</td><td>Parent</td></tr>
+<tr><td>Yearly limit</td><td>$5,500 / $6,500 / $7,500 / $7,500</td><td>$20,000 per student</td></tr>
+<tr><td>Total limit</td><td>$31,000</td><td>$65,000 per student</td></tr>
+<tr><td>Rate, 2026–27</td><td>6.52% fixed</td><td>9.07% fixed</td></tr>
+<tr><td>Fee</td><td>1.057%</td><td>4.228%</td></tr>
+<tr><td>Repayment</td><td>Tiered Standard plan, or RAP (based on income)</td><td>Tiered Standard plan only</td></tr>
+</tbody></table></div>
+<p class="src">Sources: <a href="https://www2.mu.edu/central/financial-aid/loans/undergraduate-unsubsidized.php" target="_blank" rel="noopener">Marquette (student limits, rate)</a>, <a href="https://undergradaid.northwestern.edu/types-of-aid/loans/plus-loan.html" target="_blank" rel="noopener">Northwestern (Parent PLUS limits)</a>, <a href="https://www.credible.com/blog/refinance-student-loans/federal-repayment-options/" target="_blank" rel="noopener">Credible, citing NASFAA (repayment plans)</a>, <a href="https://www.elfi.com/understanding-parent-plus-loan-changes-in-2026/" target="_blank" rel="noopener">ELFI (repayment terms)</a>. Parents who borrowed Parent PLUS for this same student before July 1, 2026 may keep the old limits for a few years.</p>
+
+<details class="more">
+  <summary>How the numbers are worked out</summary>
+  <ul class="qs">
+    <li>Plan A uses the student’s federal loan first, up to the yearly limit, then Parent PLUS for the rest. Plan B uses Parent PLUS for all of it.</li>
+    <li>Fees come out of each loan, so a family borrows a little more than it needs. For example, $20,000 of Parent PLUS delivers $19,154.</li>
+    <li>Each year’s loan is paid out in two halves, in August and January. No payments are made during school; interest builds and is added to the balance when payments start, 6 months after graduation. Parents can ask for this same deferment, or start paying sooner and pay less interest.</li>
+    <li>The repayment term comes from the balance when payments start: 10, 15, 20 or 25 years. Payments are the same every month.</li>
+    <li>If part of the student loan is subsidized (based on need), the government pays that part’s interest during school, so the student’s real cost is a little lower than shown.</li>
+    <li>A private loan, if you add one, is shown over 10 years with no fee. Real terms vary by lender.</li>
+    <li>These are planning estimates, not a loan offer.</li>
+  </ul>
+</details>
